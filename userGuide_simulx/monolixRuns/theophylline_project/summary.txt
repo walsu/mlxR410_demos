@@ -1,0 +1,99 @@
+********************************************************************************
+*                        theophylline_project.mlxtran                          *
+*                        September 27, 2019 at 10:58:59                        *
+*                        Monolix version : 5.1.0                               *
+********************************************************************************
+
+
+POPULATION PARAMETERS ESTIMATION _______________________________________________
+
+Fixed Effects ----------------------------     se_sa    rse(%)
+ka_pop                         :      1.55     0.287      18.6
+V_pop                          :      32.2      1.56      4.85
+Cl_pop                         :      2.82     0.231      8.18
+beta_Cl_lw70                   :     0.719     0.617      85.7
+
+Standard Deviation of the Random Effects -
+omega_ka                       :     0.605     0.143      23.6
+omega_V                        :     0.141    0.0415      29.5
+omega_Cl                       :     0.257    0.0641        25
+
+Error Model Parameters -------------------
+a                              :     0.593     0.121      20.3
+b                              :    0.0768    0.0309      40.3
+
+Elapsed time (seconds) :      7.4
+
+ _______________________________________________________________________________
+
+
+
+CORRELATION MATRIX OF THE ESTIMATES ____________________________________________
+
+
+Fisher by Stochastic Approximation ---------------------------------------------
+Correlation Matrix :
+      ka_pop         1
+       V_pop   0.12267         1
+      Cl_pop  -0.05248  -0.11709         1
+beta_Cl_lw70 7.1203e-5-0.0082051   0.12313         1
+    omega_ka  0.046791 -0.011899  0.003587 -0.037263         1
+     omega_V  0.040146  0.052618 -0.025593  -0.10039   0.12036         1
+    omega_Cl-0.0068348-0.0094026 -0.014526 0.0077063 -0.021631  -0.14756         1
+           a  0.076141 -0.008453-0.0029675  0.088929 -0.019167  0.020157-0.0043794         1
+           b -0.085041  0.023189 0.0047584 -0.066554 -0.024842 -0.077423 0.0020654  -0.83597         1
+                               min       max   max/min
+Eigen values           :      0.16       1.9        12
+
+Elapsed time (seconds) :    0.27
+
+ -------------------------------------------------------------------------------
+
+ _______________________________________________________________________________
+
+
+
+INDIVIDUAL PARAMETERS ESTIMATION _______________________________________________
+
+
+Individual Parameters Estimation by Conditional Mean ---------------------------
+           min        Q1    median        Q3       max
+ka :     0.735      1.01      1.44      2.16      6.09
+V  :      26.8      28.5        33        36      38.5
+Cl :      1.74      2.36      3.02      3.36      4.07
+
+Elapsed time (seconds) :     1.4
+
+ -------------------------------------------------------------------------------
+
+
+Individual Parameters Estimation by Conditional Mode ---------------------------
+           min        Q1    median        Q3       max
+ka :     0.731     0.987      1.41      2.07      5.45
+V  :      26.6      28.5      32.7      35.8      38.4
+Cl :      1.74      2.38      3.02      3.36      4.06
+
+Elapsed time (seconds) :   0.012
+
+ -------------------------------------------------------------------------------
+
+ _______________________________________________________________________________
+
+
+
+LOG-LIKELIHOOD ESTIMATION ______________________________________________________
+                                                            (is)
+
+-2 x log-likelihood                             :         344.17
+Akaike Information Criteria               (AIC) :         362.17
+Corrected Bayesian Information Criteria  (BICc) :         378.04
+Bayesian Information Criteria             (BIC) :         366.53
+
+Elapsed time                          (seconds) :           1.30
+
+
+[Importance Sampling] Standard error        : 0.034
+                      Sampling distribution : T-distribution with 5 degrees of freedom
+
+ _______________________________________________________________________________
+

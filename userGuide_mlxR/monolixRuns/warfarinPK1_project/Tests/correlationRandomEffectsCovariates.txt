@@ -1,0 +1,7 @@
+eta,covariate,statistics,p-value,test
+eta_ka,lw70,0.713399,0.481112,Pearson
+eta_ka,wt,0.947194,0.351108,Pearson
+eta_V,lw70,5.4191,7.134e-6,Pearson
+eta_V,wt,5.10353,1.73908e-5,Pearson
+eta_Cl,lw70,2.41194,0.0221934,Pearson
+eta_Cl,wt,2.32346,0.0271187,Pearson

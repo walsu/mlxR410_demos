@@ -1,0 +1,12 @@
+[LONGITUDINAL]
+input =  {a,b}
+
+EQUATION:
+lp1 = a-b*t
+lp2 = a-b*t/2
+
+DEFINITION:
+y = {type           = categorical, 
+     categories     = {1,2,3},
+     logit(P(y<=1)) = lp1,
+     logit(P(y<=2)) = lp2}

@@ -1,0 +1,34 @@
+DESCRIPTION:
+Code for QSS approximation to two compartment TMDD model 
+Parameter values are for Denosumab, Gibiansky et al. 2012
+
+
+[LONGITUDINAL]
+input = {kel, kep, Kss, kout, ktp, kpt, Vc, R0}
+
+PK:
+; Dosemg: Dose injected into central compartment (mg/kg)
+; MWlig=144700; molecular weight of ligand (Da) 
+; (Dosemg*1e-3/MWlig)*1e9 ; Dose conversion (nmol/kg)
+
+depot(target=Lctot, p=100/14.47/Vc)  ; Lc is a concentration (nM)
+
+EQUATION:
+odeType = stiff
+
+kin = kout*R0        ; Synthesis of receptor (nM/day)
+
+;Initial Conditions
+Rtot_0 = R0
+
+;Ordinary Differential Equations
+Lc = 0.5*(Lctot-Rtot-Kss+sqrt((Lctot-Rtot-Kss)^2+4*Kss*Lctot))
+ddt_Lctot = -(kel+kpt)*Lc-(Rtot*kep*Lc)/(Kss+Lc)+ktp*Lt
+ddt_Rtot  = kin-kout*Rtot-(kep-kout)*(Rtot*Lc)/(Kss+Lc)
+ddt_Lt    = -ktp*Lt + kpt*Lc
+
+;Finding Amount of Free Receptor
+P=Lctot-Lc ; Concentration of complex (nM)
+R=Rtot-P ; Concentration of receptor (nM)
+
+

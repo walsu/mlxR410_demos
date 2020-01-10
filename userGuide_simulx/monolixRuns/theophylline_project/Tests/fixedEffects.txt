@@ -1,0 +1,2 @@
+parameter,statistics(sa),p-value(sa)
+beta_Cl_lw70,1.16636,0.243

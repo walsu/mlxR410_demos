@@ -1,0 +1,29 @@
+DESCRIPTION:
+One compartment TMDD model assuming doses injected directly into central compartment
+
+
+[LONGITUDINAL]
+input = {kel, kep, kon, kout, koff, Vc, R0}
+
+PK:
+; Dosemg: Dose injected into central compartment (mg/kg)
+; MWlig=150000; molecular weight of ligand (Da) 
+; (Dosemg*1e-3/MWlig)*1e9 ; Dose conversion (nmol/kg)
+
+depot(target=L, p=100/15/Vc)  ; L is a concentration (nM)
+
+EQUATION:
+kin   = kout*R0 ; Synthesis of receptor (nM/day)
+
+;Initial Conditions
+R_0 = R0
+P_0 = 0
+
+;Ordinary Differential Equations
+ddt_L = -kel*L-kon*L*R+koff*P 
+ddt_R = kin-kout*R-kon*L*R+koff*P
+ddt_P = kon*L*R-koff*P-kep*P
+
+;Ltot and Rtot
+Lt = L+P; Total concentration of ligand (nM)
+Rt = R+P; Total concentration of receptor (nM)

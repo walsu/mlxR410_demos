@@ -1,0 +1,2 @@
+parameter,covariate,statistics,p-value,test
+Cl,lw70,1.34745,0.20757,Pearson

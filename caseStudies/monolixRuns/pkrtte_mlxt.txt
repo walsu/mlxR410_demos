@@ -1,0 +1,15 @@
+DESCRIPTION: PK + event 
+
+input = {ka, V, Cl, gamma, b}  
+
+EQUATION:
+Cc = pkmodel(ka, V, Cl)
+h = gamma*Cc
+
+DEFINITION:
+Concentration = {type=continuous, prediction=Cc, errorModel=proportional(b)}
+Hemorrhaging  = {type=event, rightCensoringTime=150, hazard=h}
+
+OUTPUT:
+output = {Concentration, Hemorrhaging}
+

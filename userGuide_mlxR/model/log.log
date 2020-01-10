@@ -1,0 +1,1 @@
+TRACE - [   ][ MLX.DISPLAY ]: The volume is not defined for the compartment 2 but a Michaelis-Menten elimination depends on it. The default value V=1 of the volume will be used for this elimination.

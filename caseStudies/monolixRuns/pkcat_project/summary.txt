@@ -1,0 +1,37 @@
+********************************************************************************
+*                          pkcat_project.mlxtran                               *
+*                          June 05, 2019 at 10:53:52                           *
+*                          Sycomore version : 5.1.0                            *
+********************************************************************************
+
+
+POPULATION PARAMETERS ESTIMATION _______________________________________________
+
+Fixed Effects ----------------------------
+Tlag_pop                       :     0.965
+ka_pop                         :      1.58
+V_pop                          :      8.08
+beta_V_twt                     :     0.891
+Cl_pop                         :     0.134
+beta_Cl_twt                    :     0.606
+ke0_pop                        :    0.0179
+th1_pop                        :      11.5
+th2_pop                        :      3.29
+th3_pop                        :      4.22
+
+Standard Deviation of the Random Effects -
+omega_Tlag                     :     0.463
+omega_ka                       :     0.904
+omega_V                        :     0.132
+omega_Cl                       :     0.258
+omega_ke0                      :    0.0687
+omega_th1                      :       1.7
+
+Error Model Parameters -------------------
+a                              :      0.29
+b                              :    0.0525
+
+Elapsed time (seconds) :       17
+
+ _______________________________________________________________________________
+

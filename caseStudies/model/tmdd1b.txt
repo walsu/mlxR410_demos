@@ -1,0 +1,29 @@
+DESCRIPTION:
+Two compartments TMDD model assuming doses injected directly into central compartment
+
+
+[LONGITUDINAL]
+input = {Cll, kep, kon, kout, koff, Vc, R0, Vt, Cld}
+
+PK:
+
+depot(target=L)  
+
+EQUATION:
+kin   = kout*R0 ; Synthesis of receptor
+kel = Cll/Vc
+k21 = Cld/Vt
+k12 = Cld/Vc
+
+;Initial Conditions
+R_0 = R0
+P_0 = 0
+
+;Ordinary Differential Equations
+ddt_L = -kel*L-kon*L*R+koff*P - k12*L + k21*D 
+;ddt_L = -kel*L-kon*L*R+koff*P 
+ddt_D =  k12*L - k21*D 
+ddt_R = kin-kout*R-kon*L*R+koff*P
+ddt_P = kon*L*R-koff*P-kep*P
+
+C = L/Vc

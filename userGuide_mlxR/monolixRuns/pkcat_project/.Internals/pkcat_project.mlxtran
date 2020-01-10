@@ -1,0 +1,83 @@
+<DATAFILE>
+
+[FILEINFO]
+file = '../../pkcat_data.txt'
+delimiter = tab
+header = {id, time, amt, dv_ori, dvid, wt, age, sex, dv}
+
+[CONTENT]
+id = {use=identifier}
+time = {use=time}
+amt = {use=amount}
+dvid = {use=observationtype}
+wt = {use=covariate, type=continuous}
+dv = {use=observation, name={conc, level}, yname={'1', '2'}, type={continuous, discrete}}
+
+<MODEL>
+
+[COVARIATE]
+input = wt
+
+EQUATION:
+twt = log(wt/70)
+
+[INDIVIDUAL]
+input = {Tlag_pop, omega_Tlag, ka_pop, omega_ka, V_pop, beta_V_twt, twt, omega_V, Cl_pop, beta_Cl_twt, omega_Cl, ke0_pop, omega_ke0, th1_pop, omega_th1, th2_pop, th3_pop}
+
+DEFINITION:
+Tlag = {distribution=logNormal, typical=Tlag_pop, sd=omega_Tlag}
+ka = {distribution=logNormal, typical=ka_pop, sd=omega_ka}
+V = {distribution=logNormal, typical=V_pop, covariate=twt, coefficient=beta_V_twt, sd=omega_V}
+Cl = {distribution=logNormal, typical=Cl_pop, covariate=twt, coefficient=beta_Cl_twt, sd=omega_Cl}
+ke0 = {distribution=logNormal, typical=ke0_pop, sd=omega_ke0}
+th1 = {distribution=normal, typical=th1_pop, sd=omega_th1}
+th2 = {distribution=logNormal, typical=th2_pop, no-variability}
+th3 = {distribution=logNormal, typical=th3_pop, no-variability}
+
+[LONGITUDINAL]
+input = {a, b}
+
+file = 'pkcat_project_model.txt'
+
+DEFINITION:
+conc = {distribution=normal, prediction=Cc, errorModel=combined1(a, b)}
+
+<FIT>
+data = {conc, level}
+model = {conc, level}
+
+<PARAMETER>
+Cl_pop = {value=0.1, method=MLE}
+Tlag_pop = {value=1, method=MLE}
+V_pop = {value=10, method=MLE}
+a = {value=1, method=MLE}
+b = {value=0.3, method=MLE}
+beta_Cl_twt = {value=0, method=MLE}
+beta_V_twt = {value=0, method=MLE}
+ka_pop = {value=1, method=MLE}
+ke0_pop = {value=0.1, method=MLE}
+omega_Cl = {value=1, method=MLE}
+omega_Tlag = {value=1, method=MLE}
+omega_V = {value=1, method=MLE}
+omega_ka = {value=1, method=MLE}
+omega_ke0 = {value=1, method=MLE}
+omega_th1 = {value=1, method=MLE}
+th1_pop = {value=10, method=MLE}
+th2_pop = {value=1, method=MLE}
+th3_pop = {value=0.111, method=MLE}
+
+<MONOLIX>
+
+[TASKS]
+populationParameters()
+individualParameters(run = false,method = none )
+fim(run = false,method = StochasticApproximation)
+logLikelihood(run = false,method = ImportanceSampling)
+plotResult(run = false,method = none )
+
+[SETTINGS]
+GLOBAL:
+exportpath = '../'
+nbchains = 2
+autochains = no
+

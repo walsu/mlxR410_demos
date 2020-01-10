@@ -1,0 +1,32 @@
+DESCRIPTION:
+QE approximation to two compartment TMDD model 
+
+
+[LONGITUDINAL]
+input = {kel, kep, kon, kout, koff, ktp, kpt, Vc, R0}
+
+PK:
+; Dosemg: Dose injected into central compartment (mg/kg)
+; MWlig=150000; molecular weight of ligand (Da) 
+; (Dosemg*1e-3/MWlig)*1e9 ; Dose conversion (nmol/kg)
+
+depot(target=Lctot, p=100/15/Vc)  ; Lc is a concentration (nM)
+
+EQUATION:
+odeType = stiff
+
+Kd=koff/kon   ; Dissociation constant (nM)
+kin = kout*R0 ; Synthesis of receptor (nM/day)
+
+;Initial Conditions
+Rtot_0 = R0
+
+;Ordinary Differential Equations
+Lc = 0.5*(Lctot-Rtot-Kd+sqrt((Lctot-Rtot-Kd)^2+4*Kd*Lctot))
+ddt_Lctot = -(kel+kpt)*Lc-(Rtot*kep*Lc)/(Kd+Lc)+ktp*Lt
+ddt_Rtot  = kin-kout*Rtot-(kep-kout)*(Rtot*Lc)/(Kd+Lc)
+ddt_Lt    = -ktp*Lt + kpt*Lc
+
+;Finding Amount of Free Receptor
+P=Lctot-Lc ; Concentration of complex (nM)
+R=Rtot-P ; Concentration of receptor (nM)

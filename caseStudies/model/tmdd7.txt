@@ -1,0 +1,29 @@
+DESCRIPTION:
+Full TMDD model for FcRn mediated recycling
+
+
+[LONGITUDINAL]
+input = {kelc, kele, kepc, kup, kout, kon, koff, konA, koffA, kr, ktp, kpt, Lc0, R0, Fc0}
+
+EQUATION:
+odeType = stiff
+
+kin = kout*R0        ; Synthesis of receptor (nM/day)
+
+;Initial Conditions
+Lc_0 = Lc0
+R_0 = R0
+
+;Ordinary Differential Equations
+ddt_Lc   = -(kelc+kup+kpt)*Lc-kon*R*Lc+koff*Pc+kr*FcLe+ktp*Lt
+ddt_Lt   = kpt*Lc-ktp*Lt
+ddt_R    = kin-kout*R-kon*R*Lc+koff*Pc
+ddt_Pc   = kon*R*Lc-(koff+kepc+kup+kpt)*Pc+ktp*Pt+kr*FcPe
+ddt_Pt   = kpt*Pc-ktp*Pt
+ddt_Le   = kup*Lc-kele*Le-konA*Fc0*Le+koffA*FcLe
+ddt_FcLe = konA*Fc0*Le-(koffA+kr)*FcLe
+ddt_Pe   = kup*Pc-kele*Pe-konA*Fc0*Pe+koffA*FcPe
+ddt_FcPe = konA*Fc0*Pe-(koffA+kr)*FcPe
+
+
+

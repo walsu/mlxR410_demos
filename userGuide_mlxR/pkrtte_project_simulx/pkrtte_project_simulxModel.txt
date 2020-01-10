@@ -1,0 +1,30 @@
+[INDIVIDUAL]
+input = {ka_pop, omega_ka, V_pop, omega_V, Cl_pop, omega_Cl, gamma_pop}
+
+DEFINITION:
+ka = {distribution=logNormal, typical=ka_pop, sd=omega_ka}
+V = {distribution=logNormal, typical=V_pop, sd=omega_V}
+Cl = {distribution=logNormal, typical=Cl_pop, sd=omega_Cl}
+gamma = {distribution=logNormal, typical=gamma_pop, no-variability}
+
+[LONGITUDINAL]
+input = {b}
+
+
+DESCRIPTION: PK + event 
+input = {ka, V, Cl, gamma}
+
+EQUATION:
+Cc = pkmodel(ka, V, Cl)
+h = gamma*Cc
+
+DEFINITION:
+
+Hemorrhaging  = {type=event, rightCensoringTime=150, hazard=h}
+
+OUTPUT:
+output = {Cc, Hemorrhaging}
+
+DEFINITION:
+Concentration = {distribution=normal, prediction=Cc, errorModel=proportional(b)}
+

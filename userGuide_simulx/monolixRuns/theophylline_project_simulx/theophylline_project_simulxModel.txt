@@ -1,0 +1,32 @@
+[COVARIATE]
+input = WEIGHT
+
+EQUATION:
+lw70 = log(WEIGHT/70)
+
+[INDIVIDUAL]
+input = {ka_pop, omega_ka, V_pop, lw70, omega_V, Cl_pop, beta_Cl_lw70, omega_Cl}
+
+DEFINITION:
+ka = {distribution=logNormal, typical=ka_pop, sd=omega_ka}
+V = {distribution=logNormal, typical=V_pop, sd=omega_V}
+Cl = {distribution=logNormal, typical=Cl_pop, covariate=lw70, coefficient=beta_Cl_lw70, sd=omega_Cl}
+
+[LONGITUDINAL]
+input = {a, b}
+
+DESCRIPTION:
+The administration is extravascular with a first order absorption (rate constant ka).
+The PK model has one compartment (volume V) and a linear elimination (clearance Cl).
+
+input = {ka, V, Cl}
+
+EQUATION:
+Cc = pkmodel(ka, V, Cl)
+
+OUTPUT:
+output = Cc
+
+DEFINITION:
+CONC = {distribution=normal, prediction=Cc, errorModel=combined2(a, b)}
+

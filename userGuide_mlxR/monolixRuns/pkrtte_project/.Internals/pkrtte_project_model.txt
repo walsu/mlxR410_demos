@@ -1,0 +1,18 @@
+
+
+[LONGITUDINAL]
+
+DESCRIPTION: PK + event 
+input = {ka, V, Cl, gamma}
+  
+
+EQUATION:
+Cc = pkmodel(ka, V, Cl)
+h = gamma*Cc
+
+DEFINITION:
+
+Hemorrhaging  = {type=event, rightCensoringTime=150, hazard=h}
+
+OUTPUT:
+output = {Cc, Hemorrhaging}

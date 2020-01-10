@@ -1,0 +1,77 @@
+; this script is generated automatically
+
+<DATAFILE>
+
+[FILEINFO]
+file = 'iov_data.txt'
+delimiter = tab
+header = { ID,   T,   D,   Y,   OCC, C1, C2, C3, C4}
+
+[CONTENT]
+ ID = {use=identifier}
+  T = {use=time}
+  D = {use=amount}
+  Y = {use=observation, name=y1, type=continuous}
+  OCC = {use=occasion}
+C1 = {use=covariate, type=continuous}
+C2 = {use=covariate, type=continuous}
+C3 = {use=covariate, type=categorical}
+C4 = {use=covariate, type=categorical}
+
+<MODEL>
+
+[COVARIATE]
+input = {C1, C2, C3, C4}
+C3 = {type=categorical, categories={A, B}}
+C4 = {type=categorical, categories={A, B}}
+
+[INDIVIDUAL]
+input = {ka_pop, beta_ka_C1, beta_ka_C2, beta_ka_C4_B, C1, C2, C4, omega_ka, gamma_ka, V_pop, beta_V_C2, omega_V, gamma_V, Cl_pop, beta_Cl_C1, beta_Cl_C3_B, C3, omega_Cl}
+C4 = {type=categorical, categories={A, B}}
+C3 = {type=categorical, categories={A, B}}
+
+DEFINITION:
+ka = {distribution=lognormal, typical=ka_pop, covariate={C1, C2, C4}, coefficient={beta_ka_C1, beta_ka_C2, {0, beta_ka_C4_B}}, varlevel={id, id*occ}, sd={omega_ka, gamma_ka}}
+V = {distribution=lognormal, typical=V_pop, covariate=C2, coefficient=beta_V_C2, varlevel={id, id*occ}, sd={omega_V, gamma_V}}
+Cl = {distribution=lognormal, typical=Cl_pop, covariate={C1, C3}, coefficient={beta_Cl_C1, {0, beta_Cl_C3_B}}, sd=omega_Cl}
+
+[LONGITUDINAL]
+input = {a, b}
+
+file = 'lib:oral1_1cpt_kaVCl.txt'
+
+DEFINITION:
+y1 = {distribution=normal, prediction=Cc, errorModel=combined1(a, b)}
+
+<FIT>
+data = y1
+model = y1
+
+<PARAMETER>
+ka_pop = {value=1.5, method=MLE}
+beta_ka_C1 = {value=0, method=MLE}
+beta_ka_C2 = {value=0, method=MLE}
+beta_ka_C4_B = {value=0, method=MLE}
+omega_ka = {value=1, method=MLE}
+gamma_ka = {value=1, method=MLE}
+V_pop = {value=0.5, method=MLE}
+beta_V_C2 = {value=0, method=MLE}
+omega_V = {value=1, method=MLE}
+gamma_V = {value=1, method=MLE}
+Cl_pop = {value=0.05, method=MLE}
+beta_Cl_C1 = {value=0, method=MLE}
+beta_Cl_C3_B = {value=0, method=MLE}
+omega_Cl = {value=1, method=MLE}
+a = {value=1, method=MLE}
+b = {value=1, method=MLE}
+
+<MONOLIX>
+
+[TASKS]
+populationParameters()
+
+[SETTINGS]
+GLOBAL:
+exportpath = 'iov2_project'
+autochains = no
+

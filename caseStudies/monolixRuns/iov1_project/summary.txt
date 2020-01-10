@@ -1,0 +1,36 @@
+********************************************************************************
+*                          iov1_project.mlxtran                                *
+*                          June 05, 2019 at 10:41:17                           *
+*                          Sycomore version : 5.1.0                            *
+********************************************************************************
+
+
+POPULATION PARAMETERS ESTIMATION _______________________________________________
+
+Fixed Effects ----------------------------
+ka_pop                         :      1.01
+beta_ka_C1                     : -0.000205
+beta_ka_C2                     :  0.000611
+beta_ka_C4_B                   :   0.00192
+V_pop                          :     0.198
+beta_V_C2                      :  0.000391
+Cl_pop                         :    0.0307
+beta_Cl_C1                     :  0.000322
+beta_Cl_C3_B                   :    -0.216
+
+Standard Deviation of the Random Effects -
+omega_ka                       :     0.349
+omega_V                        :     0.297
+omega_Cl                       :     0.298
+
+gamma_ka                       :    0.0163
+gamma_V                        :   0.00942
+
+Error Model Parameters -------------------
+a                              :  0.000926
+b                              :    0.0977
+
+Elapsed time (seconds) :   1.7e+2
+
+ _______________________________________________________________________________
+
